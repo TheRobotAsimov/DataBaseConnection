@@ -1,73 +1,75 @@
-# HOW TO CREATE A DATA BASE CONNECTION WITH JAVA
+# CÓMO CREAR UNA CONEXIÓN A UNA BASE DE DATOS CON JAVA
 
-## INDEX
+## ÍNDICE
 
-- [HOW TO CREATE A DATA BASE CONNECTION WITH JAVA](#how-to-create-a-data-base-connection-with-java)
-  - [INDEX](#index)
-  - [DOWNLOAD AND UPLOAD DRIVER](#download-and-upload-driver)
-  - [DRIVER CONFIGURATION. `Conexion` CLASS](#driver-configuration-conexion-class)
-    - [JavaToSQL Method](#javatosql-method)
+- [CÓMO CREAR UNA CONEXIÓN A UNA BASE DE DATOS CON JAVA](#cómo-crear-una-conexión-a-una-base-de-datos-con-java)
+  - [ÍNDICE](#índice)
+  - [DESCARGAR E INSTALAR EL DRIVER](#descargar-e-instalar-el-driver)
+  - [CONFIGURACIÓN DEL CONTROLADOR. CLASE `Conexion`](#configuración-del-controlador-clase-conexion)
+    - [Método JavaToSQL](#método-javatosql)
       - [`Class.forName`](#classforname)
       - [`Connection info`](#connection-info)
       - [`DriverManager.getConnection`](#drivermanagergetconnection)
-    - [The Rest Of The Variables](#the-rest-of-the-variables)
-  - [MAIN CLASS (`TestBaseDataConnection`)](#main-class-testbasedataconnection)
+    - [El Resto De Las Variables](#el-resto-de-las-variables)
+  - [CLASE MAIN (`TestBaseDataConnection`)](#clase-main-testbasedataconnection)
 
 
 <br>
 
-## DOWNLOAD AND UPLOAD DRIVER
+## DESCARGAR E INSTALAR EL DRIVER
 
-First of all, we need to download the Java driver that will let us to use MySQL commands with Java code.
+Primero, necesitamos descargar el driver Java que nos permitirá usar comandos de MySQL con código Java.
 
-The teacher provides us with two different driver versions, 5.0.8 and 8.0.33 (or you can look for it on the internet). Whatever you choose is right, it just changes a code line from the driver configuration. Not a big deal.
+El profesor nos proporciona dos versiones diferentes del driver, 5.0.8 y 8.0.33 (o puedes buscarlo en internet). Cualquiera que elijas está bien, esto solo cambia una línea de código de la configuración del driver (lo veremos más adelante). No es gran cosa.
 
 ![drivers](./images/Drivers-Classroom.png)
 
-Once you're done, it's time for uploading that driver into your Netbeans project. You can do that by:
+Una vez que hayas terminado, es hora de cargar ese driver en tu proyecto de NetBeans. Puedes hacerlo de la siguiente manera:
 
-1. Left clicking in your project
+1. Haz clic derecho en tu proyecto
 
 ![project](./images/Left-Click-Project.png)
 
-2. Then click on 'properties'
+2. Luego haz clic en 'propiedades'
 
 ![propierties](./images/Properties.png)
 
-3. Select the 'Libraries' category
+3. Selecciona la categoría 'Bibliotecas'
 
 ![libraries](./images/Libraries.png)
 
-4. And in the 'Classpath' option, select the .JAR file you just downloaded <sup>1</sup>
+4. Y en la opción 'Classpath', selecciona el archivo .JAR que acabas de descargar <sup>1</sup>
 
- **Note 1:** the .JAR file can be inside the folder you downloaded
+ **Nota 1:** el archivo . JAR puede estar dentro de la carpeta que descargaste
 
 ![classpath](./images/Classpath.png)
 
-5. Driver is loaded!, now close window.
+5. ¡El driver está cargado!, ahora cierra la ventana.
+
+![done](./images/Driver-Cargado.png)
 
 <br>
 <br>
 
-(Return to [index](#index))
+(Regresar al [índice](#índice))
 
 <br>
 
-## DRIVER CONFIGURATION. `Conexion` CLASS
+## CONFIGURACIÓN DEL CONTROLADOR. CLASE `Conexion`
 
-Now it's time to configure the driver in order to get access to one of our Data Bases (DB). So we gonna need to specify information like port, DB name, user, password, etc.
+Ahora es el momento de configurar el controlador para obtener acceso a una de nuestras Bases de Datos (BD). Así que necesitaremos especificar información como puerto, nombre de BD, usuario, contraseña, etc.
 
-That information will be stored in our method `JavaToSQL` (from `Conexion` class).
+Esa información se almacenará en nuestro método `JavaToSQL` (de la clase `Conexion`).
 
 ![conexion class](./images/Conexion-Class.png)
 
-### JavaToSQL Method
+### Método JavaToSQL
 
 #### `Class.forName` 
 
-It loads the driver. What we are doing here is literally telling which class we're gonna use (this must be done since we're using a external library)
+Esta línea carga el driver. Lo que estamos haciendo aquí es literalmente decir qué clase vamos a usar (esto debe hacerse ya que estamos usando una biblioteca externa).
 
-**Note:** This code line depends on which driver version we're using, because the "class name" or "class direction" is different.
+**Nota**: Esta línea de código depende de qué versión del controlador estemos usando, porque el la "dirección de la clase" es diferente.
 
 ```java
 
@@ -78,7 +80,7 @@ It loads the driver. What we are doing here is literally telling which class we'
 
 ![5.0.8 Driver](./images/Driver-Direction-5.png)
 
-or
+o
 
 ```java
     
@@ -89,7 +91,7 @@ or
 
 #### `Connection info`
 
-Here we only set the DB info in *Strings*.
+Aquí solo configuramos la información de la BD en **Strings**.
 
 ```java
 
@@ -97,10 +99,10 @@ Here we only set the DB info in *Strings*.
 
 ```
 
-- `jdbc:mysql://` -> The driver name
-- `localhost:` -> The IP direction
-- `3307` -> The port direction (usually 3306)
-- `practica1` -> The DB name
+- `jdbc:mysql://` -> El nombre del driver
+- `localhost:` -> La dirección IP
+- `3307` -> La dirección del puerto (usualmente 3306)
+- `practica1` -> El nombre de la BD
 
 
 ```java
@@ -112,33 +114,32 @@ Here we only set the DB info in *Strings*.
 
 #### `DriverManager.getConnection`
 
-In this part we need some libraries, `import java.sql.Connection` and `
-import java.sql.DriverManager` to be more specific.
+En esta parte necesitamos algunas bibliotecas, `import java.sql.Connection` y `import java.sql.DriverManager` para ser más específicos.
 
-*Connection* is used for our `conexion` variable. This is our bridge between Java and MySQL.
+*Connection* se usa para nuestra variable `conexion`. Este es nuestro puente entre Java y MySQL.
 
 ```java
     public Connection conexion = null;
 ```
 
-In this example, our variable is public since we're gonna use it in our main class.
+En este ejemplo, nuestra variable es pública ya que la usaremos en nuestra clase principal.
 
 ---
 <br>
 
-And we use a *DriverManager* method to get the connection with the Connection info we just set:
+Y usamos un método de *DriverManager* para obtener la conexión con la información de conexión que acabamos de configurar:
 
 ```java
     conexion = DriverManager.getConnection(servidor, usuario, password);
 ```
 
-And that's practically all from this method.
+Y eso es prácticamente todo de este método.
 
 <br>
 
-### The Rest Of The Variables
+### El Resto De Las Variables
 
-In this class we have two more variables: `comando` and `registro`. Each one requires its own import statement: `import java.sql.Statement` and `import java.sql.ResulSet`.
+En esta clase tenemos dos variables más: `comando` y `registro`. Cada una requiere su propia declaración de importación: `import java.sql.Statement` e `import java.sql.ResultSet`.
 
 ```java
 
@@ -148,44 +149,44 @@ In this class we have two more variables: `comando` and `registro`. Each one req
 
 ```
 
-- `comando`: We're gonna use this one to send SQL commands to our DB
-- `registro`: And this is to save our results from the SQL commands
+- `comando`: Usaremos esta para enviar comandos SQL a nuestra BD.
+- `registro`: Y esta es para guardar nuestros resultados de los comandos SQL.
 
 <br>
 <br>
 
-(Return to [index](#index))
+(Regresar al [índice](#índice))
 
 <br>
 
-## MAIN CLASS (`TestBaseDataConnection`)
+## CLASE MAIN (`TestBaseDataConnection`)
 
-Inside of our `try-catch`, we create a *Conexion* variable:
+Dentro de nuestro `try-catch`, creamos una variable de tipo *Conexion*:
 
 ```java
     Conexion conector = new Conexion();
 ```
 
-Now we call our `JavaToSQL` method. If you remember, this will load our "*conexion*" variable with *DriverManager.getConnection*. So if it works, *conexion* will not be `null` anymore and will be ready to be used; else, it goes to catch.
+Ahora llamamos a nuestro método `JavaToSQL`. Si recuerdas, esto cargará nuestra variable "conexion" con DriverManager.getConnection. Así que si funciona, conexion ya no será `null` y estará lista para usarse; de lo contrario, irá al catch.
 
 ```java
     conector.JavaToMySQL();
 ```
 
-Then, we prepare our query with Strings
+Luego, preparamos nuestra consulta con Strings.
 
 ```java
     String tabla = "persona";
     String query = "select * from "+tabla;  
 ```
 
-Also we prepare the "*comando*" variable. As we saw before, it is `null`, but we can't work with nulls, so we create a Statement object by using `createStatement()`
+También preparamos la variable "*comando*". Como vimos antes, es `null`, pero no podemos trabajar con nulls, así que creamos un objeto Statement usando `createStatement()`.
 
 ```java
     conector.comando = conector.conexion.createStatement();
 ```
 
-And we execute the query. The query result will be saved in our "*registro*" variable.
+Y ejecutamos la consulta. El resultado de la consulta se guardará en nuestra variable "*registro*".
 
 ```java
 
@@ -193,7 +194,7 @@ And we execute the query. The query result will be saved in our "*registro*" var
 
 ```
 
-Finally, we print our results. `getString(columnIndex)` retrieves the value of the designated column
+Finalmente, imprimimos nuestros resultados. `getString(columnIndex)` recupera el valor de la columna designada.
 
 ```java
     while(conector.registro.next()){
@@ -201,11 +202,11 @@ Finally, we print our results. `getString(columnIndex)` retrieves the value of t
         }
 ```
 
-And that's all.
+Y eso es todo.
 
 <br>
 <br>
 
-(Return to [index](#index))
+(Regresar al [índice](#índice))
 
 <br>
