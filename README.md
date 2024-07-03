@@ -5,7 +5,7 @@
 - [CÓMO CREAR UNA CONEXIÓN A UNA BASE DE DATOS CON JAVA](#cómo-crear-una-conexión-a-una-base-de-datos-con-java)
   - [ÍNDICE](#índice)
   - [DESCARGAR E INSTALAR EL DRIVER](#descargar-e-instalar-el-driver)
-  - [CONFIGURACIÓN DEL CONTROLADOR. CLASE `Conexion`](#configuración-del-controlador-clase-conexion)
+  - [CONFIGURACIÓN DEL DRIVER. CLASE `Conexion`](#configuración-del-driver-clase-conexion)
     - [Método JavaToSQL](#método-javatosql)
       - [`Class.forName`](#classforname)
       - [`Connection info`](#connection-info)
@@ -55,7 +55,7 @@ Una vez que hayas terminado, es hora de cargar ese driver en tu proyecto de NetB
 
 <br>
 
-## CONFIGURACIÓN DEL CONTROLADOR. CLASE `Conexion`
+## CONFIGURACIÓN DEL DRIVER. CLASE `Conexion`
 
 Ahora es el momento de configurar el controlador para obtener acceso a una de nuestras Bases de Datos (BD). Así que necesitaremos especificar información como puerto, nombre de BD, usuario, contraseña, etc.
 
